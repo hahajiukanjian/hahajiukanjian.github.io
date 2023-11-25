@@ -6,6 +6,8 @@ site_description: 哈哈就看见的个人网站
 
 
 nav:
+  - 网站:
+    - index.md
   - 技术学习:
     - JavaWeb:
       - Servlet: 技术学习/Java/JavaWeb/Servlet/Servlet-JSP.md
