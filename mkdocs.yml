@@ -1,1 +1,11 @@
-site_name: My Docs
+# [Info]
+site_name: 哈哈就看见的个人网站 # 左上角标题
+site_url: https://hahajiukanjian.github.io
+site_author: 丁永涛
+site_description: 哈哈就看见的个人网站
+
+
+nav:
+  - 技术学习:
+    - JavaWeb:
+      - Servlet: 技术学习/Java/JavaWeb/Servlet/Servlet-JSP.md
