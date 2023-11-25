@@ -8,16 +8,14 @@ theme:
   name: material
   palette:
     # 白昼
-    - media: "(prefers-color-scheme: light)"
-      scheme: default # 亮色
+    - scheme: default # 亮色
       primary: light blue # 设置头部框框为蓝色
       accent: light blue # 悬停链接、按钮和滚动条
       toggle:
         icon: material/brightness-7
         name: 切换为黑夜模式
     # 黑夜
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate # 暗色
+    - scheme: slate # 暗色
       toggle:
         icon: material/brightness-4
         name: 切换为白昼模式
