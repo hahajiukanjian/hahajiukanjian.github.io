@@ -24,5 +24,7 @@ jobs:
           path: .cache
           restore-keys: |
             mkdocs-material-
+      - name: Display Jekyll Config
+        run: cat _config.yml  # 假设配置文件名为 _config.yml
       - run: pip install mkdocs-material
       - run: mkdocs gh-deploy --force
