@@ -63,12 +63,6 @@ nav:
   - 开发:
       - CPP数据中心
 
-
-plugins:
-  - git-revision-date-localized:
-      enable_creation_date: true
-  # - git-authors # 显示文章作者
-
 markdown_extensions:
   - toc:
       toc_depth: 2
