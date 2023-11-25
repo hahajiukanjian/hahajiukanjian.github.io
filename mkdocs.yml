@@ -8,8 +8,7 @@ theme:
   name: material
 
 nav:
-  - 网站:
-    - index.md
+  - index.md
   - 技术学习:
     - JavaWeb:
-      - Servlet: 技术学习/Java/JavaWeb/Servlet/Servlet-JSP.md
+      - Servlet-JSP: 技术学习/Java/JavaWeb/Servlet/Servlet-JSP.md
