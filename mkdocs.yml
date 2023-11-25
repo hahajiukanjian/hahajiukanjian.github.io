@@ -4,6 +4,8 @@ site_url: https://hahajiukanjian.github.io
 site_author: 丁永涛
 site_description: 哈哈就看见的个人网站
 
+theme:
+  name: material
 
 nav:
   - 网站:
