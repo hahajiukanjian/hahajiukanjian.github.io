@@ -241,19 +241,19 @@
 ## 实现一个最基本的web应用（这个web应用中没有java小程序）
 
 - 第一步：找到CATALINA_HOME\webapps目录
-  
+
   - 因为所有的webapp要放到webapps目录下。（没有为什么，这是Tomcat服务器的要求。如果不放到这里，Tomcat服务器找不到你的应用。）
 - 第二步：在CATALINA_HOME\webapps目录下新建一个子目录，起名：oa
-  
+
   - 这个目录名oa就是你这个webapp的名字。
 - 第三步：在oa目录下新建资源文件，例如：index.html
-  
+
   - 编写index.html文件的内容。
 - 第四步：启动Tomcat服务器
 - 第五步：打开浏览器，在浏览器地址栏上输入这样的URL：
-  
+
 - http://127.0.0.1:8080/oa/index.html
-  
+
 - 思考一个问题：
 
   - 我们在浏览器上直接输入一个URL，然后回车。这个动作和超链接一样吗？既然是一样的，我们完全可以使用超链接。
@@ -261,14 +261,14 @@
     ```html
     <!--注意以下的路径，以/开始，带项目名，是一个绝对路径。不需要添加：http://127.0.0.1:8080-->
     <a href="/oa/login.html">user login2</a>
-    
+
     <!--多个层级也没有关系，正常访问即可。-->
     <!--注意：我们目前前端上的路径都以“/”开始的，都是加项目名的。-->
     <a href="/oa/test/debug/d.html">d page</a>
     ```
 
 
-- http://127.0.0.1:8080/oa/userList.html 
+- http://127.0.0.1:8080/oa/userList.html
   - 访问这个地址，可以展示一个用户列表页面。但是这个用户列表页面是写死在HTML文件当中的。这种资源我们称为静态资源。怎么能变成动态资源。显然需要连接数据库。
   - 连接数据库需要JDBC程序，也就是说需要编写Java程序连接数据库，数据库中有多少条记录，页面上就显示多少条记录，这种技术被称为动态网页技术。（动态网页技术并不是说页面中有flash动画。动态网页技术是说页面中的数据是动态的，根据数据库中数据的变化而变化。）
 
@@ -330,17 +330,17 @@
 
     - ```xml
       <?xml version="1.0" encoding="UTF-8"?>
-      
+
       <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                             https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
         version="5.0"
         metadata-complete="true">
-      
-      
+
+
       </web-app>
-      
+
       ```
 
   - 第六步：编写一个Java程序，这个小Java程序也不能随意开发，这个小java程序必须实现Servlet接口。
@@ -370,14 +370,14 @@
 
     - ```xml
       <?xml version="1.0" encoding="UTF-8"?>
-      
+
       <web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee
                             https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
         version="5.0"
         metadata-complete="true">
-      
+
       	<!--servlet描述信息-->
       	<!--任何一个servlet都对应一个servlet-mapping -->
       	<servlet>
@@ -385,7 +385,7 @@
       		<!--这个位置必须是带有包名的全限定类名-->
       		<servlet-class>com.bjpowernode.servlet.HelloServlet</servlet-class>
       	</servlet>
-      
+
       	<!--servlet映射信息-->
       	<servlet-mapping>
       		<!--这个也是随便的，不过这里写的内容要和上面的一样。-->
@@ -395,18 +395,18 @@
       		<!--当前这个路径可以随便写-->
       		<url-pattern>/fdsa/fd/saf/d/sa/fd/sa/fd</url-pattern>
       	</servlet-mapping>
-      	
+
       </web-app>
-      
+
       ```
 
-      
+
 
   - 第十步：启动Tomcat服务器
 
   - 第十一步：打开浏览器，在浏览器地址栏上输入一个url，这个URL必须是：
 
-    - http://127.0.0.1:8080/crm/fdsa/fd/saf/d/sa/fd/sa/fd   
+    - http://127.0.0.1:8080/crm/fdsa/fd/saf/d/sa/fd/sa/fd
     - 非常重要的一件事：浏览器上的请求路径不能随便写，这个请求路径必须和web.xml文件中的url-pattern一致。
     - 注意：浏览器上的请求路径和web.xml文件中的url-pattern的唯一区别就是：浏览器上的请求路径带项目名：/crm
 
@@ -431,8 +431,8 @@
 
   - 浏览器发送请求，到最终服务器调用Servlet中的方法，是怎样的一个过程？（以下这个过程描述的很粗糙。其中还有很多步骤我省略了。）
 
-    - 用户输入URL，或者直接点击超链接：http://127.0.0.1:8080/crm/fdsa/fd/saf/d/sa/fd/sa/fd  
-    - 然后Tomcat服务器接收到请求，截取路径：/crm/fdsa/fd/saf/d/sa/fd/sa/fd  
+    - 用户输入URL，或者直接点击超链接：http://127.0.0.1:8080/crm/fdsa/fd/saf/d/sa/fd/sa/fd
+    - 然后Tomcat服务器接收到请求，截取路径：/crm/fdsa/fd/saf/d/sa/fd/sa/fd
     - Tomcat服务器找到crm项目
     - Tomcat服务器在web.xml文件中查找/fdsa/fd/saf/d/sa/fd/sa/fd  对应的Servlet是：com.bjpowernode.servlet.HelloServlet
     - Tomcat服务器通过反射机制，创建com.bjpowernode.servlet.HelloServlet的对象。
@@ -507,7 +507,7 @@ public void service(ServletRequest request, ServletResponse response){
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
            version="4.0">
-  
+
       <servlet>
           <servlet-name>studentServlet</servlet-name>
           <servlet-class>com.bjpowernode.javaweb.servlet.StudentServlet</servlet-class>
@@ -516,11 +516,11 @@ public void service(ServletRequest request, ServletResponse response){
           <servlet-name>studentServlet</servlet-name>
           <url-pattern>/servlet/student</url-pattern>
       </servlet-mapping>
-      
+
   </web-app>
   ```
 
-  
+
 
   - 第九步：给一个html页面，在HTML页面中编写一个超链接，用户点击这个超链接，发送请求，Tomcat执行后台的StudentServlet。
 
@@ -544,7 +544,7 @@ public void service(ServletRequest request, ServletResponse response){
       </html>
       ```
 
-      
+
 
   - 第十步：让IDEA工具去关联Tomcat服务器。关联的过程当中将webapp部署到Tomcat服务器当中。
 
@@ -653,7 +653,7 @@ public void service(ServletRequest request, ServletResponse response){
   - 请问：destroy方法调用的时候，对象销毁了还是没有销毁呢？
 
     - destroy方法执行的时候AServlet对象还在，没有被销毁。destroy方法执行结束之后，AServlet对象的内存才会被Tomcat释放。
-    
+
   - Servlet对象更像一个人的一生：
 
     - Servlet的无参数构造方法执行：标志着你出生了。
@@ -733,21 +733,21 @@ public void service(ServletRequest request, ServletResponse response){
               // 创建LoginServlet对象（通过反射机制，调用无参数构造方法来实例化LoginServlet对象）
               Class clazz = Class.forName("com.bjpowernode.javaweb.servlet.LoginServlet");
               Object obj = clazz.newInstance();
-              
+
               // 向下转型
               Servlet servlet = (Servlet)obj;
-              
+
               // 创建ServletConfig对象
               // Tomcat服务器负责将ServletConfig对象实例化出来。
               // 多态（Tomcat服务器完全实现了Servlet规范）
               ServletConfig servletConfig = new org.apache.catalina.core.StandardWrapperFacade();
-              
+
               // 调用Servlet的init方法
               servlet.init(servletConfig);
-              
+
               // 调用Servlet的service方法
               // ....
-              
+
           }
       }
       ```
@@ -841,7 +841,7 @@ public void service(ServletRequest request, ServletResponse response){
     public void log(String message, Throwable t);
     // 这些日志信息记录到哪里了？
     // localhost.2021-11-05.log
-    
+
     // Tomcat服务器的logs目录下都有哪些日志文件？
     //catalina.2021-11-05.log 服务器端的java程序运行的控制台信息。
     //localhost.2021-11-05.log ServletContext对象的log方法记录的日志信息存储到这个文件中。
@@ -850,26 +850,26 @@ public void service(ServletRequest request, ServletResponse response){
 
   - ```java
     // ServletContext对象还有另一个名字：应用域（后面还有其他域，例如：请求域、会话域）
-    
+
     // 如果所有的用户共享一份数据，并且这个数据很少的被修改，并且这个数据量很少，可以将这些数据放到ServletContext这个应用域中
-    
+
     // 为什么是所有用户共享的数据？ 不是共享的没有意义。因为ServletContext这个对象只有一个。只有共享的数据放进去才有意义。
-    
+
     // 为什么数据量要小？ 因为数据量比较大的话，太占用堆内存，并且这个对象的生命周期比较长，服务器关闭的时候，这个对象才会被销毁。大数据量会影响服务器的性能。占用内存较小的数据量可以考虑放进去。
-    
+
     // 为什么这些共享数据很少的修改，或者说几乎不修改？
     // 所有用户共享的数据，如果涉及到修改操作，必然会存在线程并发所带来的安全问题。所以放在ServletContext对象中的数据一般都是只读的。
-    
+
     // 数据量小、所有用户共享、又不修改，这样的数据放到ServletContext这个应用域当中，会大大提升效率。因为应用域相当于一个缓存，放到缓存中的数据，下次在用的时候，不需要从数据库中再次获取，大大提升执行效率。
-    
+
     // 存（怎么向ServletContext应用域中存数据）
     public void setAttribute(String name, Object value); // map.put(k, v)
     // 取（怎么从ServletContext应用域中取数据）
     public Object getAttribute(String name); // Object v = map.get(k)
     // 删（怎么删除ServletContext应用域中的数据）
     public void removeAttribute(String name); // map.remove(k)
-    
-    
+
+
     ```
 
 - 注意：以后我们编写Servlet类的时候，实际上是不会去直接继承GenericServlet类的，因为我们是B/S结构的系统，这种系统是基于HTTP超文本传输协议的，在Servlet规范当中，提供了一个类叫做HttpServlet，它是专门为HTTP协议准备的一个Servlet类。我们编写的Servlet类要继承HttpServlet。（HttpServlet是HTTP协议专用的。）使用HttpServlet处理HTTP协议更便捷。但是你需要直到它的继承结构：
@@ -878,7 +878,7 @@ public void service(ServletRequest request, ServletResponse response){
     jakarta.servlet.Servlet（接口）【爷爷】
     jakarta.servlet.GenericServlet implements Servlet（抽象类）【儿子】
     jakarta.servlet.http.HttpServlet extends GenericServlet（抽象类）【孙子】
-    
+
     我们以后编写的Servlet要继承HttpServlet类。
     ```
 
@@ -972,7 +972,7 @@ public void service(ServletRequest request, ServletResponse response){
                                                                                               请求体
       ```
 
-    
+
 
   - HTTP请求协议的具体报文：POST请求
 
@@ -1234,14 +1234,14 @@ public class HelloServlet extends HttpServlet {
 	// 用户第一次请求，创建HelloServlet对象的时候，会执行这个无参数构造方法。
 	public HelloServlet() {
     }
-    
+
     //override 重写 doGet方法
     //override 重写 doPost方法
 }
 
 public abstract class GenericServlet implements Servlet, ServletConfig,
         java.io.Serializable {
-           
+
 	// 用户第一次请求的时候，HelloServlet对象第一次被创建之后，这个init方法会执行。
     public void init(ServletConfig config) throws ServletException {
         this.config = config;
@@ -1275,7 +1275,7 @@ public abstract class HttpServlet extends GenericServlet {
         // 调用重载的service方法。
         service(request, response);
     }
-    
+
     // 这个service方法的两个参数都是带有Http的。
     // 这个service是一个模板方法。
     // 在该方法中定义核心算法骨架，具体的实现步骤延迟到子类中去完成。
@@ -1348,22 +1348,22 @@ public abstract class HttpServlet extends GenericServlet {
             resp.sendError(HttpServletResponse.SC_NOT_IMPLEMENTED, errMsg);
         }
     }
-    
-    
+
+
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException{
         // 报405错误
         String msg = lStrings.getString("http.method_get_not_supported");
         sendMethodNotAllowed(req, resp, msg);
     }
-    
+
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
         throws ServletException, IOException {
         // 报405错误
         String msg = lStrings.getString("http.method_post_not_supported");
         sendMethodNotAllowed(req, resp, msg);
     }
-    
+
 }
 
 /*
@@ -1373,16 +1373,16 @@ public abstract class HttpServlet extends GenericServlet {
 	会发生什么呢？
 		发生405这样的一个错误。
 		405表示前端的错误，发送的请求方式不对。和服务器不一致。不是服务器需要的请求方式。
-	
+
 	通过以上源代码可以知道：只要HttpServlet类中的doGet方法或doPost方法执行了，必然405.
 
 怎么避免405的错误呢？
 	后端重写了doGet方法，前端一定要发get请求。
 	后端重写了doPost方法，前端一定要发post请求。
 	这样可以避免405错误。
-	
+
 	这种前端到底需要发什么样的请求，其实应该后端说了算。后端让发什么方式，前端就得发什么方式。
-	
+
 有的人，你会看到为了避免405错误，在Servlet类当中，将doGet和doPost方法都进行了重写。
 这样，确实可以避免405的发生，但是不建议，405错误还是有用的。该报错的时候就应该让他报错。
 如果你要是同时重写了doGet和doPost，那还不如你直接重写service方法好了。这样代码还能
@@ -1507,7 +1507,7 @@ public abstract class HttpServlet extends GenericServlet {
         }
         ```
 
-        
+
 
     - 第二步：在web.xml文件中配置servlet
 
@@ -1530,7 +1530,7 @@ public abstract class HttpServlet extends GenericServlet {
             </welcome-file-list>
         ```
 
-        
+
 
 ## 关于WEB-INF目录
 
@@ -1616,7 +1616,7 @@ public abstract class HttpServlet extends GenericServlet {
           ```
 
       - 注意：前端表单提交数据的时候，假设提交了120这样的“数字”，其实是以字符串"120"的方式提交的，所以服务器端获取到的一定是一个字符串的"120"，而不是一个数字。（前端永远提交的是字符串，后端获取的也永远是字符串。）
-    
+
   - 手工开发一个webapp。测试HttpServletRequest接口中的相关方法。
 
     - 先测试了4个常用的方法，获取请求参数的四个方法。
@@ -1628,7 +1628,7 @@ public abstract class HttpServlet extends GenericServlet {
         	String value = request.getParameter("name");
         ```
 
-        
+
 
     - request对象实际上又称为“请求域”对象。
 
@@ -1658,7 +1658,7 @@ public abstract class HttpServlet extends GenericServlet {
             void setAttribute(String name, Object obj); // 向域当中绑定数据。
             Object getAttribute(String name); // 从域当中根据name获取数据。
             void removeAttribute(String name); // 将域当中绑定的数据移除
-            
+
             // 以上的操作类似于Map集合的操作。
             Map<String, Object> map;
             map.put("name", obj); // 向map集合中放key和value
@@ -1683,86 +1683,86 @@ public abstract class HttpServlet extends GenericServlet {
         - 请求域和应用域的选用原则？
 
           - 尽量使用小的域对象，因为小的域对象占用的资源较少。
-        
+
       - 跳转
-      
+
         - 转发（一次请求）
-      
+
           - ```java
             // 第一步：获取请求转发器对象
             RequestDispatcher dispatcher = request.getRequestDispatcher("/b");
             // 第二步：调用转发器的forward方法完成跳转/转发
             dispatcher.forward(request,response);
-            
+
             // 第一步和第二步代码可以联合在一起。
             request.getRequestDispatcher("/b").forward(request,response);
-            
+
             ```
-      
+
       - 两个Servlet怎么共享数据？
-      
+
         - 将数据放到ServletContext应用域当中，当然是可以的，但是应用域范围太大，占用资源太多。不建议使用。
         - 可以将数据放到request域当中，然后AServlet转发到BServlet，保证AServlet和BServlet在同一次请求当中，这样就可以做到两个Servlet，或者多个Servlet共享同一份数据。
-      
+
       - 转发的下一个资源必须是一个Servlet吗？
-      
+
         - 不一定，只要是Tomcat服务器当中的合法资源，都是可以转发的。例如：html....
         - 注意：转发的时候，路径的写法要注意，转发的路径以“/”开始，不加项目名。
-      
+
       - 关于request对象中两个非常容易混淆的方法：
-      
+
         - ```java
-          
+
           // uri?username=zhangsan&userpwd=123&sex=1
           String username = request.getParameter("username");
-          
+
           // 之前一定是执行过：request.setAttribute("name", new Object())
           Object obj = request.getAttribute("name");
-          
+
           // 以上两个方法的区别是什么？
           // 第一个方法：获取的是用户在浏览器上提交的数据。
           // 第二个方法：获取的是请求域当中绑定的数据。
           ```
-      
+
       - HttpServletRequest接口的其他常用方法：
-      
+
         - ```java
           // 获取客户端的IP地址
           String remoteAddr = request.getRemoteAddr();
-          
+
           // get请求在请求行上提交数据。
           // post请求在请求体中提交数据。
           // 设置请求体的字符集。（显然这个方法是处理POST请求的乱码问题。这种方式并不能解决get请求的乱码问题。）
           // Tomcat10之后，request请求体当中的字符集默认就是UTF-8，不需要设置字符集，不会出现乱码问题。
           // Tomcat9前（包括9在内），如果前端请求体提交的是中文，后端获取之后出现乱码，怎么解决这个乱码？执行以下代码。
           request.setCharacterEncoding("UTF-8");
-          
+
           // 在Tomcat9之前（包括9），响应中文也是有乱码的，怎么解决这个响应的乱码？
           response.setContentType("text/html;charset=UTF-8");
           // 在Tomcat10之后，包括10在内，响应中文的时候就不在出现乱码问题了。以上代码就不需要设置UTF-8了。
-          
+
           // 注意一个细节
           // 在Tomcat10包括10在内之后的版本，中文将不再出现乱码。（这也体现了中文地位的提升。）
-          
+
           // get请求乱码问题怎么解决？
           // get请求发送的时候，数据是在请求行上提交的，不是在请求体当中提交的。
           // get请求乱码怎么解决
           // 方案：修改CATALINA_HOME/conf/server.xml配置文件
           <Connector URIEncoding="UTF-8" />
           // 注意：从Tomcat8之后，URIEncoding的默认值就是UTF-8，所以GET请求也没有乱码问题了。
-              
+
           // 获取应用的根路径
           String contextPath = request.getContextPath();
-          
+
           // 获取请求方式
           String method = request.getMethod();
-          
+
           // 获取请求的URI
           String uri = request.getRequestURI();  // /aaa/testRequest
-          
+
           // 获取servlet path
           String servletPath = request.getServletPath(); //   /testRequest
-          
+
           ```
 
 ## 使用纯Servlet做一个单表的CRUD操作
@@ -1852,14 +1852,14 @@ public abstract class HttpServlet extends GenericServlet {
 
       - ```java
         package com.bjpowernode.oa.web.action;
-        
+
         import jakarta.servlet.ServletException;
         import jakarta.servlet.http.HttpServlet;
         import jakarta.servlet.http.HttpServletRequest;
         import jakarta.servlet.http.HttpServletResponse;
-        
+
         import java.io.IOException;
-        
+
         public class DeptListServlet extends HttpServlet {
             @Override
             protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -1881,7 +1881,7 @@ public abstract class HttpServlet extends GenericServlet {
             String deptno = rs.getString("a");
             String dname = rs.getString("dname");
             String loc = rs.getString("loc");
-        
+
             out.print("			<tr>");
             out.print("				<td>"+(++i)+"</td>");
             out.print("				<td>"+deptno+"</td>");
@@ -1936,14 +1936,14 @@ public abstract class HttpServlet extends GenericServlet {
 
       - ```java
         package com.bjpowernode.oa.web.action;
-        
+
         import jakarta.servlet.ServletException;
         import jakarta.servlet.http.HttpServlet;
         import jakarta.servlet.http.HttpServletRequest;
         import jakarta.servlet.http.HttpServletResponse;
-        
+
         import java.io.IOException;
-        
+
         public class DeptDetailServlet extends HttpServlet {
             @Override
             protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -1955,13 +1955,13 @@ public abstract class HttpServlet extends GenericServlet {
             }
         }
         ```
-    
+
     - 在doGet方法当中：连接数据库，根据部门编号查询该部门的信息。动态展示部门详情页。
-    
+
   - 第七步：删除部门
-  
+
     - 怎么开始？从哪里开始？从前端页面开始，用户点击删除按钮的时候，应该提示用户是否删除。因为删除这个动作是比较危险的。任何系统在进行删除操作之前，是必须要提示用户的，因为这个删除的动作有可能是用户误操作。（在前端页面上写JS代码，来提示用户是否删除。）
-  
+
       - ```html
         <a href="javascript:void(0)" onclick="del(30)" >删除</a>
         <script type="text/javascript">
@@ -1972,17 +1972,17 @@ public abstract class HttpServlet extends GenericServlet {
         	}
         </script>
         ```
-  
+
     - 以上的前端程序要写到后端的java代码当中：
-  
+
       - DeptListServlet类的doGet方法当中，使用out.print()方法，将以上的前端代码输出到浏览器上。
-  
+
     - 解决404的问题：
-  
-      - http://localhost:8080/oa/dept/delete?deptno=30 
-  
+
+      - http://localhost:8080/oa/dept/delete?deptno=30
+
       - web.xml文件
-  
+
         - ```xml
           <servlet>
               <servlet-name>delete</servlet-name>
@@ -1993,31 +1993,31 @@ public abstract class HttpServlet extends GenericServlet {
               <url-pattern>/dept/delete</url-pattern>
           </servlet-mapping>
           ```
-  
+
       - 编写DeptDelServlet继承HttpServlet，重写doGet方法。
-  
+
       - ```java
         package com.bjpowernode.oa.web.action;
-        
+
         import jakarta.servlet.ServletException;
         import jakarta.servlet.http.HttpServlet;
         import jakarta.servlet.http.HttpServletRequest;
         import jakarta.servlet.http.HttpServletResponse;
-        
+
         import java.io.IOException;
-        
+
         public class DeptDelServlet extends HttpServlet {
             @Override
             protected void doGet(HttpServletRequest request, HttpServletResponse response)
                     throws ServletException, IOException {
                 // 根据部门编号，删除部门。
-                
+
             }
         }
         ```
-  
+
       - 删除成功或者失败的时候的一个处理（这里我们选择了转发，并没有使用重定向机制。）
-  
+
         - ```java
           // 判断删除成功了还是失败了。
           if (count == 1) {
@@ -2030,9 +2030,9 @@ public abstract class HttpServlet extends GenericServlet {
               request.getRequestDispatcher("/error.html").forward(request, response);
           }
           ```
-  
+
   - 第八步：新增部门
-  
+
     - 注意：最后保存成功之后，转发到 /dept/list 的时候，会出现405，为什么？
       - 第一：保存用的是post请求。底层要执行doPost方法。
       - 第二：转发是一次请求，之前是post，之后还是post，因为它是一次请求。
@@ -2040,9 +2040,9 @@ public abstract class HttpServlet extends GenericServlet {
       - 怎么解决？两种方案
         - 第一种：在/dept/list Servlet中添加doPost方法，然后在doPost方法中调用doGet。
         - 第二种：重定向。
-  
+
   - 第九步：跳转到修改部门的页面
-  
+
   - 第十步：修改部门
 
 ## 在一个web应用中应该如何完成资源的跳转
@@ -2063,7 +2063,7 @@ public abstract class HttpServlet extends GenericServlet {
         RequestDispatcher dispatcher = request.getRequestDispatcher("/dept/list");
         // 调用请求转发器对象的forward方法完成转发
         dispatcher.forward(request, response);
-        
+
         // 合并一行代码
         request.getRequestDispatcher("/dept/list").forward(request, response);
         // 转发的时候是一次请求，不管你转发了多少次。都是一次请求。
@@ -2081,7 +2081,7 @@ public abstract class HttpServlet extends GenericServlet {
         response.sendRedirect("/oa/dept/list");
         ```
 
-        
+
 
   - 形式上有什么区别？
 
@@ -2188,7 +2188,7 @@ public abstract class HttpServlet extends GenericServlet {
   - 用户打开浏览器，进行一系列操作，然后最终将浏览器关闭，这个整个过程叫做：一次会话。会话在服务器端也有一个对应的java对象，这个java对象叫做：session。
   - 什么是一次请求：用户在浏览器上点击了一下，然后到页面停下来，可以粗略认为是一次请求。请求对应的服务器端的java对象是：request。
   - 一个会话当中包含多次请求。（一次会话对应N次请求。）
-  
+
 - 在java的servlet规范当中，session对应的类名：HttpSession（jarkata.servlet.http.HttpSession）
 
 - session机制属于B/S结构的一部分。如果使用php语言开发WEB项目，同样也是有session这种机制的。session机制实际上是一个规范。然后不同的语言对这种会话机制都有实现。
@@ -2200,11 +2200,11 @@ public abstract class HttpServlet extends GenericServlet {
   - 什么是无状态：请求的时候，B和S是连接的，但是请求结束之后，连接就断了。为什么要这么做？HTTP协议为什么要设计成这样？因为这样的无状态协议，可以降低服务器的压力。请求的瞬间是连接的，请求结束之后，连接断开，这样服务器压力小。
   - 只要B和S断开了，那么关闭浏览器这个动作，服务器知道吗？
     - 不知道。服务器是不知道浏览器关闭的。
-  
+
 - 张三打开一个浏览器A，李四打开一个浏览器B，访问服务器之后，在服务器端会生成：
   - 张三专属的session对象
   - 李四专属的session对象
-  
+
 - 为什么不使用request对象保存会话状态？为什么不使用ServletContext对象保存会话状态？
   - request.setAttribute()存，request.getAttribute()取，ServletContext也有这个方法。request是请求域。ServletContext是应用域。
   - request是一次请求一个对象。
@@ -2212,11 +2212,11 @@ public abstract class HttpServlet extends GenericServlet {
   - ServletContext对象的域太大。
   - request请求域（HttpServletRequest）、session会话域（HttpSession）、application域（ServletContext）
   - request < session < application
-  
+
 - 思考一下：session对象的实现原理。
   - HttpSession session = request.getSession();
   - 这行代码很神奇。张三访问的时候获取的session对象就是张三的。李四访问的时候获取的session对象就是李四的。
-  
+
 - session的实现原理：
 
   - JSESSIONID=xxxxxx  这个是以Cookie的形式保存在浏览器的内存中的。浏览器只要关闭。这个cookie就没有了。
@@ -2269,7 +2269,7 @@ public abstract class HttpServlet extends GenericServlet {
   - 只要浏览器不关闭，用户再次发送请求的时候，会自动将运行内存中的cookie发送给服务器。
   - 例如，这个Cookie: JSESSIONID=41C481F0224664BDB28E95081D23D5B8就会再次发送给服务器。
   - 服务器就是根据41C481F0224664BDB28E95081D23D5B8这个值来找到对应的session对象的。
-  
+
 - cookie怎么生成？cookie保存在什么地方？cookie有啥用？浏览器什么时候会发送cookie，发送哪些cookie给服务器？？？？？？？
 
 - cookie最终是保存在浏览器客户端上的。
@@ -2341,7 +2341,7 @@ public abstract class HttpServlet extends GenericServlet {
             String value = cookie.getValue();
         }
     }
-    
+
     ```
 
 - 使用cookie实现一下十天内免登录功能。
@@ -2365,21 +2365,21 @@ public abstract class HttpServlet extends GenericServlet {
 # JSP
 
 - 我的第一个JSP程序：
-  
+
   - 在WEB-INF目录之外创建一个index.jsp文件，然后这个文件中没有任何内容。
-  
+
 - 将上面的项目部署之后，启动服务器，打开浏览器，访问以下地址：
   - http://localhost:8080/jsp/index.jsp 展现在大家面前的是一个空白。
   - 实际上访问以上的这个：index.jsp，底层执行的是：index_jsp.class 这个java程序。
   - 这个index.jsp会被tomcat翻译生成index_jsp.java文件，然后tomcat服务器又会将index_jsp.java编译生成index_jsp.class文件
   - 访问index.jsp，实际上执行的是index_jsp.class中的方法。
-  
+
 - JSP实际上就是一个Servlet。
   - index.jsp访问的时候，会自动翻译生成index_jsp.java，会自动编译生成index_jsp.class，那么index_jsp 这就是一个类。
   - index_jsp 类继承 HttpJspBase，而HttpJspBase类继承的是HttpServlet。所以index_jsp类就是一个Servlet类。
   - jsp的生命周期和Servlet的生命周期完全相同。完全就是一个东西。没有任何区别。
   - jsp和servlet一样，都是单例的。（假单例。）
-  
+
 - jsp文件第一次访问的时候是比较慢的，为什么？
   - 为什么大部分的运维人员在给客户演示项目的时候，为什么提前先把所有的jsp文件先访问一遍。
   - 第一次比较麻烦：
@@ -2390,25 +2390,25 @@ public abstract class HttpServlet extends GenericServlet {
     - 最后调用servlet对象的service方法。
   - 第二次就比较快了，为什么？
     - 因为第二次直接调用单例servlet对象的service方法即可。
-  
+
 - JSP是什么？
   - JSP是java程序。（JSP本质还是一个Servlet）
   - JSP是：JavaServer Pages的缩写。（基于Java语言实现的服务器端的页面。）
   - Servlet是JavaEE的13个子规范之一，那么JSP也是JavaEE的13个子规范之一。
   - JSP是一套规范。所有的web容器/web服务器都是遵循这套规范的，都是按照这套规范进行的“翻译”
   - 每一个web容器/web服务器都会内置一个JSP翻译引擎。
-  
+
 - 对JSP进行错误调试的时候，还是要直接打开JSP文件对应的java文件，检查java代码。
 
 - 开发JSP的最高境界：
-  
+
   - 眼前是JSP代码，但是脑袋中呈现的是java代码。
-  
+
 - JSP既然本质上是一个Servlet，那么JSP和Servlet到底有什么区别呢？
   - 职责不同：
     - Servlet的职责是什么：收集数据。（Servlet的强项是逻辑处理，业务处理，然后链接数据库，获取/收集数据。）
     - JSP的职责是什么：展示数据。（JSP的强项是做数据的展示）
-  
+
 - JSP的基础语法
   - 在jsp文件中直接编写文字，都会自动被翻译到哪里？
     - 翻译到servlet类的service方法的out.write("翻译到这里")，直接翻译到双引号里，被java程序当做普通字符串打印输出到浏览器。
@@ -2434,7 +2434,7 @@ public abstract class HttpServlet extends GenericServlet {
       - 如果向浏览器上输出的内容中没有“java代码”，例如输出的字符串是一个固定的字符串，可以直接在jsp中编写，不需要写到<%%> 这里。
       - 如果输出的内容中含有“java代码”，这个时候可以使用以下语法格式：
         - <%= %> 注意：在=的后面编写要输出的内容。
-        - <%= %> 这个符号会被翻译到哪里？最终翻译成什么？ 
+        - <%= %> 这个符号会被翻译到哪里？最终翻译成什么？
           - 翻译成了这个java代码：   out.print();
           - 翻译到service方法当中了。
         - 什么时候使用<%=%> 输出呢？输出的内容中含有java的变量，输出的内容是一个动态的内容，不是一个死的字符串。如果输出的是一个固定的字符串，直接在JSP文件中编写即可。
@@ -2458,19 +2458,19 @@ public abstract class HttpServlet extends GenericServlet {
     - 将之前原型中的html文件，全部修改为jsp，然后在jsp文件头部添加page指令（指定contentType防止中文乱码），将所有的JSP直接拷贝到web目录下。
 
     - 完成所有页面的正常流转。（页面仍然能够正常的跳转。修改超链接的请求路径。）
-      
+
       - <%=request.getContextPath() %>  在JSP中动态的获取应用的根路径。
-      
+
     - Servlet中连接数据库，查询所有的部门，遍历结果集。
       - 遍历结果集的过程中，取出部门编号、部门名、位置等信息，封装成java对象。
       - 将java对象存放到List集合中。
       - 将List集合存储到request域当中。
       - 转发forward到jsp。
-      
+
     - 在JSP中：
       - 从request域当中取出List集合。
       - 遍历List集合，取出每个部门对象。动态生成tr。
-      
+
     - 思考一个问题：如果我只用JSP这一个技术，能不能开发web应用？
 
       - 当然可以使用JSP来完成所有的功能。因为JSP就是Servlet，在JSP的<%%>里面写的代码就是在service方法当中的，所以在<%%>当中完全可以编写JDBC代码，连接数据库，查询数据，也可以在这个方法当中编写业务逻辑代码，处理业务，都是可以的，所以使用单独的JSP开发web应用完全没问题。
@@ -2511,7 +2511,7 @@ public abstract class HttpServlet extends GenericServlet {
       - 由于javabean符合javabean规范，具有更强的通用性。
 
     - 完成剩下所有功能的改造。
-  
+
 - 当前的oa应用存在的问题：
 
   - 任何一个用户都可以访问这个系统，都可以对这个系统当中的数据进行增删改这些危险的操作。我只想让合法的用户去使用这个系统，不合法的用户不能访问这个系统，怎么办？
@@ -2533,7 +2533,7 @@ public abstract class HttpServlet extends GenericServlet {
 
   - 这个登录功能目前只是一个摆设，没有任何作用。只要用户知道后端的请求路径，照样可以在不登录的情况下访问。
   - 这个登录没有真正起到拦截的作用。怎么解决？
-  
+
 - JSP的指令
 
   - 指令的作用：指导JSP的翻译引擎如何工作（指导当前的JSP翻译引擎如何翻译JSP文件。）
@@ -2597,7 +2597,7 @@ public abstract class HttpServlet extends GenericServlet {
     - 以上四个作用域都有：setAttribute、getAttribute、removeAttribute方法。
     - 以上作用域的使用原则：尽可能使用小的域。
 
-  - java.lang.Throwable exception   
+  - java.lang.Throwable exception
 
   - jakarta.servlet.ServletConfig config
 
@@ -2613,7 +2613,7 @@ public abstract class HttpServlet extends GenericServlet {
   - EL表达式可以代替JSP中的java代码，让JSP文件中的程序看起来更加整洁，美观。
   - JSP中夹杂着各种java代码，例如<% java代码 %>、<%=%>等，导致JSP文件很混乱，不好看，不好维护。所以才有了后期的EL表达式。
   - EL表达式可以算是JSP语法的一部分。EL表达式归属于JSP。
-  
+
 - EL表达式出现在JSP中主要是：
   - 从某个作用域中取数据，然后将其转换成字符串，然后将其输出到浏览器。这就是EL表达式的功效。三大功效：
     - 第一功效：从某个域中取数据。
@@ -2626,10 +2626,10 @@ public abstract class HttpServlet extends GenericServlet {
       - 如果是一个java对象，也会自动调用java对象的toString方法将其转换成字符串。
     - 第三功效：将字符串输出到浏览器。
       - 和这个一样：<%= %>，将其输出到浏览器。
-  
+
 - EL表达式很好用，基本的语法格式：
   - ${表达式}
-  
+
 - EL表达式的使用：
 
   - ```jsp
@@ -2639,26 +2639,26 @@ public abstract class HttpServlet extends GenericServlet {
     	user.setUsername("jackson");
     	user.setPassword("1234");
     	user.setAge(50);
-    
+
     	// 将User对象存储到某个域当中。一定要存，因为EL表达式只能从某个范围中取数据。
     	// 数据是必须存储到四大范围之一的。
     	request.setAttribute("userObj", user);
     %>
-    
+
     <%--使用EL表达式取--%>
     ${这个位置写什么？？？？这里写的一定是存储到域对象当中时的name}
     要这样写：
     ${userObj}
     等同于java代码：<%=request.getAttribute("userObj")%>
     你不要这样写：${"userObj"}
-    
+
     面试题：
     	${abc} 和 ${"abc"}的区别是什么？
     		${abc}表示从某个域中取出数据，并且被取的这个数据的name是"abc"，之前一定有这样的代码: 域.setAttribute("abc", 对象);
     		${"abc"} 表示直接将"abc"当做普通字符串输出到浏览器。不会从某个域中取数据了。
-    
+
     ${userObj} 底层是怎么做的？从域中取数据，取出user对象，然后调用user对象的toString方法，转换成字符串，输出到浏览器。
-    
+
     <%--如果想输出对象的属性值，怎么办？--%>
     ${userObj.username} 使用这个语法的前提是：User对象有getUsername()方法。
     ${userObj.password} 使用这个语法的前提是：User对象有getPassword()方法。
@@ -2666,7 +2666,7 @@ public abstract class HttpServlet extends GenericServlet {
     ${userObj.email} 使用这个语法的前提是：User对象有getEmail()方法。
     EL表达式中的. 这个语法，实际上调用了底层的getXxx()方法。
     注意：如果没有对应的get方法，则出现异常。报500错误。
-    
+
     ${userObj.addr222.zipcode}
     以上EL表达式对应的java代码：
     user.getAddr222().getZipcode()
@@ -2709,9 +2709,9 @@ public abstract class HttpServlet extends GenericServlet {
       <%@page contentType="text/html;charset=UTF-8" isELIgnored="true" %>
       isELIgnored="true" 表示忽略EL表达式
       isELIgnored="false" 表示不忽略EL表达式。（这是默认值）
-      
+
       isELIgnored="true" 这个是全局的控制。
-      
+
       可以使用反斜杠进行局部控制：\${username} 这样也可以忽略EL表达式。
       ```
 
@@ -2725,17 +2725,17 @@ public abstract class HttpServlet extends GenericServlet {
     - param
     - paramValues
     - initParam
-  
+
   - EL表达式的运算符
-  
+
     - 算术运算符
       - +、-、*、/、%
     - 关系运算符
-      - [ ] == eq != > >= < <= 
+      - [ ] == eq != > >= < <=
     - 逻辑运算符
       - [ ] !  && ||  not and or
     - 条件运算符
-      - [ ] ? : 
+      - [ ] ? :
     - 取值运算符
       - [ ]和.
     - empty运算符
@@ -2763,19 +2763,19 @@ public abstract class HttpServlet extends GenericServlet {
       - 在WEB-INF下新建lib目录，然后将jar包拷贝到lib当中。然后将其“Add Lib...”
       - 一定是要和mysql的数据库驱动一样，都是放在WEB-INF/lib目录下的。
       - 什么时候需要将jar包放到WEB-INF/lib目录下？如果这个jar是tomcat服务器没有的。
-    
+
   - 第二步：在JSP中引入要使用标签库。（使用taglib指令引入标签库。）
-  
+
     - JSTL提供了很多种标签，你要引入哪个标签？？？？重点掌握核心标签库。
-  
+
     - ```
       <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
       这个就是核心标签库。
       prefix="这里随便起一个名字就行了，核心标签库，大家默认的叫做c，你随意。"
       ```
-  
+
   - 第三步：在需要使用标签的位置使用即可。表面使用的是标签，底层实际上还是java程序。
-  
+
 - JSTL标签的原理
 
   - ```
@@ -2804,25 +2804,25 @@ public abstract class HttpServlet extends GenericServlet {
               <rtexprvalue>false</rtexprvalue> 这个描述说明了该属性是否支持EL表达式。false表示不支持。true表示支持EL表达式。
           </attribute>
         </tag>
-      
+
       <c:catch var="">
       	JSP....
       </c:catch>
       ```
-    
+
   - jstl中的核心标签库core当中有哪些常用的标签呢？
-  
+
     - c:if
-  
+
       - <c:if test="boolean类型，支持EL表达式"></c: if>
-  
+
     - c:forEach
-  
+
       - <c:forEach items="集合，支持EL表达式" var="集合中的元素" varStatus="元素状态对象"> ${元素状态对象.count} </c: forEach>
       - <c:forEach var="i" begin="1" end="10" step="2"> ${i} </c: forEach>
-  
+
     - c:choose c:when c:otherwise
-  
+
       - ```
         <c:choose>
             <c:when test="${param.age < 18}">
@@ -2868,12 +2868,12 @@ public abstract class HttpServlet extends GenericServlet {
 - 当前的OA项目存在什么缺陷？
   - DeptServlet、EmpServlet、OrderServlet。每一个Servlet都是处理自己相关的业务。在这些Servlet执行之前都是需要判断用户是否登录了。如果用户登录了，可以继续操作，如果没有登录，需要用户登录。这段判断用户是否登录的代码是固定的，并且在每一个Servlet类当中都需要编写，显然代码没有得到重复利用。包括每一个Servlet都要解决中文乱码问题，也有公共的代码。这些代码目前都是重复编写，并没有达到复用。怎么解决这个问题?
     - 可以使用Servlet规范中的Filter过滤器来解决这个问题。
-  
+
 - Filter是什么，有什么用，执行原理是什么？
   - Filter是过滤器。
   - Filter可以在Servlet这个目标程序执行之前添加代码。也可以在目标Servlet执行之后添加代码。之前之后都可以添加过滤规则。
   - 一般情况下，都是在过滤器当中编写公共代码。
-  
+
 - 一个过滤器怎么写呢？
 
   - 第一步：编写一个Java类实现一个接口：jarkata.servlet.Filter。并且实现这个接口当中所有的方法。
@@ -2947,7 +2947,7 @@ public abstract class HttpServlet extends GenericServlet {
     - 在程序编译阶段不会确定调用顺序。因为Filter的调用顺序是配置到web.xml文件中的，只要修改web.xml配置文件中filter-mapping的顺序就可以调整Filter的执行顺序。显然Filter的执行顺序是在程序运行阶段动态组合的。那么这种设计模式被称为责任链设计模式。
   - 责任链设计模式最大的核心思想：
     - 在程序运行阶段，动态的组合程序的调用顺序。
-  
+
 - 使用过滤器改造OA项目。
 
 # Listener监听器
@@ -3003,17 +3003,17 @@ public abstract class HttpServlet extends GenericServlet {
       ```
 
     - 当然，第二步也可以不使用配置文件，也可以用注解，例如：@WebListener
-  
+
 - 注意：所有监听器中的方法都是不需要javaweb程序员调用的，由服务器来负责调用？什么时候被调用呢？
 
   - 当某个特殊的事件发生（特殊的事件发生其实就是某个时机到了。）之后，被web服务器自动调用。
-  
+
 - 思考一个业务场景：
 
   - 请编写一个功能，记录该网站实时的在线用户的个数。
   - 我们可以通过服务器端有没有分配session对象，因为一个session代表了一个用户。有一个session就代表有一个用户。如果你采用这种逻辑去实现的话，session有多少个，在线用户就有多少个。这种方式的话：HttpSessionListener够用了。session对象只要新建，则count++，然后将count存储到ServletContext域当中，在页面展示在线人数即可。
   - 业务发生改变了，只统计登录的用户的在线数量，这个该怎么办？
-    - session.setAttribute("user", userObj); 
+    - session.setAttribute("user", userObj);
     - 用户登录的标志是什么？session中曾经存储过User类型的对象。那么这个时候可以让User类型的对象实现HttpSessionBindingListener监听器，只要User类型对象存储到session域中，则count++，然后将count++存储到ServletContext对象中。页面展示在线人数即可。
 
 - 实现oa项目中当前登录在线的人数。
