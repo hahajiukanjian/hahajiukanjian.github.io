@@ -22,7 +22,7 @@ theme:
         icon: material/brightness-4
         name: 切换为白昼模式
   features:
-    - navigation.instant
+      - navigation.tabs
 
 nav:
   - index.md
