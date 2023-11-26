@@ -25,7 +25,7 @@ theme:
     - navigation.instant # 即时加载
     - navigation.instant.prefetch
     - navigation.instant.progress # 加载时间超过400毫秒时，显示进度条
-    - navigation.sections # 关闭左侧折叠
+    # - navigation.sections # 关闭左侧折叠
     - navigation.path # 打开一个文档时，在文档上方开启导航路径
     - toc.integrate # 将右侧的目录改为在左侧显示
     - search.highlight # 高亮搜索
@@ -56,14 +56,60 @@ extra:
 
 nav:
   - index.md
-  - 技术学习:
-    - JavaWeb:
-      - Servlet: 技术学习/Java/JavaWeb/Servlet/1-Servlet.md
-      - JSP: 技术学习/Java/JavaWeb/Servlet/2-JSP.md
-      - EL表达式: 技术学习/Java/JavaWeb/Servlet/3-EL表达式.md
-      - JSTL: 技术学习/Java/JavaWeb/Servlet/4-JSTL标签库.md
-      - Filter: 技术学习/Java/JavaWeb/Servlet/5-Filter过滤器.md
+  - 学习:
+    - 技术学习/index.md
+    - CPP:
+      - make_cmake_pmake: 技术学习/CPP/make_makefile_cmake_qmake.md
+      - 哈希表: 技术学习/CPP/hash/哈希表.md
+      - 散列表: 技术学习/CPP/hash/数据结构基础-散列表(Hash).md
+      - 数据结构:
+        - 绪论: 技术学习/CPP/数据结构/Chap1绪论/绪论.md
+        - 线性表: 技术学习/CPP/数据结构/Chap2线性表/线性表.md
+        - 栈和队列: 技术学习/CPP/数据结构/Chap3 栈和队列/栈和队列.md
+        - 串、数组和广义表: 技术学习/CPP/数据结构/Chap4 串、数组和广义表/串、数组和广义表.md
+        - 树: 技术学习/CPP/数据结构/Chap5 树/树.md
+        - 图: 技术学习/CPP/数据结构/Chap6 图/图.md
+        - 查找与排序: 技术学习/CPP/数据结构/Chap7_查找与排序/查找与排序.md
+    - JAVA:
+      - JavaWeb:
+        - Servlet: 技术学习/Java/JavaWeb/Servlet/1-Servlet.md
+        - JSP: 技术学习/Java/JavaWeb/Servlet/2-JSP.md
+        - EL表达式: 技术学习/Java/JavaWeb/Servlet/3-EL表达式.md
+        - JSTL: 技术学习/Java/JavaWeb/Servlet/4-JSTL标签库.md
+        - Filter: 技术学习/Java/JavaWeb/Servlet/5-Filter过滤器.md
+      - JDBC: 技术学习/Java/JDBC/JDBC.md
+    - 前端:
+      - CSS: 技术学习/前端/CSS.md
+      - JavaScript: 技术学习/前端/JavaScript.md
+      - Vue: 技术学习/前端/Vue.md
+    - Tips:
+      - 计算机网络:
+        - 问答: 技术学习/tips/计算机网络/计算机网络问答.md
+      - 奇奇怪怪的BUG:
+        - TomCat启动不成功: 技术学习/tips/奇奇怪怪的BUG/tomcat启动不成功.md
+      - Linux:
+        - Arch:
+          - Nerwork_Wating_IWD_start: 技术学习/tips/Linux/arch/Nerwork_Wating_IWD_start.md
+          - Network_wpa: 技术学习/tips/Linux/arch/Network_wpa.md
+          - pacman: 技术学习/tips/Linux/arch/pacman.md
+        - deepin:
+          - deepin简介: 技术学习/tips/Linux/deepin/deepin简介.md
+          - 贡献者手册: 技术学习/tips/Linux/deepin/贡献者手册/C++项目接口文档手册.md
+        - Shell:
+          - shell、bash、cmd、PowerShell的区别: 技术学习/tips/Linux/shell/shell、bash、cmd、PowerShell的区别.md
+        - Docker:
+          - Docker安装Ubuntu: 技术学习/tips/Linux/docker/docker_安装ubuntu.md
+      - Mac:
+        - ssh:
+          - ssh_安装ssh: 技术学习/tips/macOS/ssh/ssh_安装ssh.md
+          - ssh_连接错误: 技术学习/tips/macOS/ssh/ssh_连接错误.md
+          - ssh_免密登录: 技术学习/tips/macOS/ssh/ssh_免密登录.md
+          - ssh_无法ssh连接root用户: 技术学习/tips/macOS/ssh/ssh_无法ssh连接root用户.md
+        - 关闭长按按键出现特殊字符: 技术学习/tips/macOS/关闭长按按键出现特殊字符.md
+        - brew安装qt: 技术学习/tips/macOS/brew安装qt.md
+      - Git: 技术学习/tips/git.md
   - 开发:
+    - 开发/index.md
     - CPP数据中心:
       - 前期学习:
         - 第7章:
