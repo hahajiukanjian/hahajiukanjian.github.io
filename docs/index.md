@@ -1,4 +1,4 @@
-# 欢迎！
+# 欢迎
 
 这里是哈哈就看见的个人网站 <https://hahajiukanjian.github.io>
 
