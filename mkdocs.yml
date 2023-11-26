@@ -70,6 +70,8 @@ nav:
     - 技术学习/index.md
     - CPP:
       - make_cmake_pmake: 技术学习/CPP/make_makefile_cmake_qmake.md
+      - gcc: 技术学习/CPP/gcc.md
+      - byte-bit-16进制: 技术学习/CPP/Byte_bit_16进制.md
       - 哈希表: 技术学习/CPP/hash/哈希表.md
       - 散列表: 技术学习/CPP/hash/数据结构基础-散列表(Hash).md
       - 数据结构:
@@ -82,12 +84,16 @@ nav:
         - 查找与排序: 技术学习/CPP/数据结构/Chap7_查找与排序/查找与排序.md
     - JAVA:
       - JavaWeb:
-        - Servlet: 技术学习/Java/JavaWeb/Servlet/1-Servlet.md
-        - JSP: 技术学习/Java/JavaWeb/Servlet/2-JSP.md
-        - EL表达式: 技术学习/Java/JavaWeb/Servlet/3-EL表达式.md
-        - JSTL: 技术学习/Java/JavaWeb/Servlet/4-JSTL标签库.md
-        - Filter: 技术学习/Java/JavaWeb/Servlet/5-Filter过滤器.md
-      - JDBC: 技术学习/Java/JDBC/JDBC.md
+        - Servlet: 技术学习/Java/JakartEE/JavaWeb/Servlet/1-Servlet.md
+        - JSP: 技术学习/Java/JakartEE/JavaWeb/Servlet/2-JSP.md
+        - EL表达式: 技术学习/Java/JakartEE/JavaWeb/Servlet/3-EL表达式.md
+        - JSTL: 技术学习/Java/JakartEE/JavaWeb/Servlet/4-JSTL标签库.md
+        - Filter: 技术学习/Java/JakartEE/JavaWeb/Servlet/5-Filter过滤器.md
+        - Servlet-JSP讲义: 技术学习/Java/JakartEE/JavaWeb/0-Servlet-JSP-课堂笔记.md
+      - JDBC: 技术学习/Java/JakartEE/JDBC/JDBC.md
+      - Spring6:
+        - Spring6讲义: 技术学习/Java/JakartEE/Spring6/Spring-课上.md
+        - Spring6: 技术学习/Java/JakartEE/Spring6/Spring.md
     - 前端:
       - CSS: 技术学习/前端/CSS.md
       - JavaScript: 技术学习/前端/JavaScript.md
@@ -95,6 +101,11 @@ nav:
     - Tips:
       - 计算机网络:
         - 问答: 技术学习/tips/计算机网络/计算机网络问答.md
+      - MySQL:
+        - 索引_列_字段: 技术学习/tips/MySQL/索引_列_字段.md
+        - macos使用brew安装mysql: 技术学习/tips/MySQL/macos使用brew安装mysql.md
+        - mysql_set_table_utf8: 技术学习/tips/MySQL/mysql_set_table_utf8.md
+        - mysql安装: 技术学习/tips/MySQL/mysql安装.md
       - 奇奇怪怪的BUG:
         - TomCat启动不成功: 技术学习/tips/奇奇怪怪的BUG/tomcat启动不成功.md
       - Linux:
