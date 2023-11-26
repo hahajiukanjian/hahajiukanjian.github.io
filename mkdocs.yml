@@ -6,18 +6,28 @@ site_description: 哈哈就看见的个人网站
 
 theme:
   name: material
+
   palette:
-    - scheme: default # 亮色
+    - media: "(prefers-color-scheme)" # 自动
+      accent: light blue # 悬停链接、按钮和滚动条
+      toggle:
+        icon: material/brightness-auto
+        name: 切换为黑夜模式
+    - media: "(prefers-color-scheme: light)" # 白色
+      scheme: default
       primary: indigo # 设置头部框框为紫色
       accent: light blue # 悬停链接、按钮和滚动条
       toggle:
         icon: material/brightness-7
-        name: 切换为黑夜模式
-    - scheme: slate # 暗色
+        name: 切换为系统偏好模式
+    - media: "(prefers-color-scheme: dark)" # 黑色
+      scheme: slate
+      accent: light blue # 悬停链接、按钮和滚动条
       primary: black
       toggle:
         icon: material/brightness-4
         name: 切换为白昼模式
+
   features:
     - navigation.tabs # 启用选项卡
     # - navigation.top # 返回顶部的按钮 在上滑时出现
