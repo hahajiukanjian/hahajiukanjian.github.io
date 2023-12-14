@@ -1,3 +1,11 @@
+> 本篇前期以Vue2.X学习为主。
+>
+> 对于语法细节的研究可以查看Vue2.X的api官网
+>
+> https://v2.cn.vuejs.org/v2/api/
+>
+> 通过搜索以查看详细的举例说明
+
 ## Vue的引入
 
 Vue (读音 /vjuː/，类似于 **view**) 是一套用于构建用户界面的**渐进式框架**。
@@ -353,5 +361,146 @@ Vue框架自己是能够看懂的。这种语法在Vue框架中被称为：模�
         }
     })
 </script>
+```
+
+#### v-model指令详解
+
+v-bind和v-model的区别和联系
+
+- v-bind和v-model这两个指令都可以完成数据绑定。
+    - v-bind是单向数据绑定。
+        - data ===> 视图
+    - v-model是双向数据绑定。
+        - data <===> 视图
+- v-bind可以使用在任何HTML标签当中。v-model只能使用在表单类元素上
+    - input标签、select标签、textarea标签
+        - 举例参见：https://v2.cn.vuejs.org/v2/api/#v-model
+    - 为什么v-model的使用会有这个限制呢？
+        - 因为表单类的元素才能给用户提供交互输入的界面。
+    - v-model指令通常也是用在value属性上面的。
+- v-model简写方式：
+    - v-model:value="表达式"  简写为      v-model="表达式"
+
+### MVVM
+
+- **M：**model（模型/数据）
+- **V：**view（视图）
+- **VM：**ViewModel（视图模型）：VM是MVVM中的核心部分。（它起到一个核心的非常重要的作用。）
+- ![image-20231214153957630](./Vue.assets/image-20231214153957630.png)
+
+MVVM是目前前端开发领域当中非常流行的开发思想。(一种架构模式。)
+目前前端的大部分主流框架都实现了这个MVVM思想，例如Vue，React等。
+
+1. Vue框架遵循MVVM吗？
+    - 虽然没有完全遵循 MVVM 模型，但是 Vue 的设计也受到了它的启发。
+    - Vue框架基本上也是符合MVVM思想的。
+2. MVVM模型当中倡导了Model和View进行了分离，为什么要分离？
+    - 假如Model和View不分离，使用最原始的原生的javascript代码写项目：
+    - 如果数据发生任意的改动，接下来我们需要编写大篇幅的操作DOM元素的JS代码。
+
+将Model和View分离之后，出现了一个VM核心，这个VM把所有的脏活累活给做了，也就是说，当Model发生改变之后，VM自动去更新View。当View发生改动之后，VM自动去更新Model。我们再也不需要编写操作DOM的JS代码了。开发效率提高了很多。
+
+```vue
+<!-- View V-->
+<div id="app">
+姓名：<input type="text" v-model="name">
+</div>
+
+<!-- vue程序 -->
+<script>
+// ViewModel  VM
+const vm = new Vue({
+    el : '#app',
+    // Model  M
+    data : {
+        name : 'zhangsan'
+    }
+})
+</script>
+```
+
+### VM
+
+```html
+<div id="app">
+    {{msg}}
+</div>
+
+<script>
+    const vm = new Vue({
+        el : '#app',
+        data : {
+            msg : 'Hello World'
+        }
+    })
+</script>
+```
+
+现在有以上代码，在浏览器的控制台中，输出vm的变量可以发现有
+
+![image-20231210123318746](./Vue.assets/image-20231210123318746.png)其中有以`$`和`_`开头的，还有正常的。
+
+以`$`开头的可以看做是公开的属性，这些属性是供程序员使用的。
+
+以`_`开头可以看做是私有的属性，这些属性是Vue框架底层使用的。一般我们程序员很少使用。
+
+
+
+### Object的数据代理机制
+
+```js
+let clazz = {}
+
+let name = "哈哈就看见"
+
+Object.defineProperty(clazz, "clazzname", {
+    // value : "nihao",
+    // writable : false,
+    get : function() {
+        console.log("get方法执行了")
+        return name
+    },
+
+    set : function(temp) {
+        console.log("set方法执行了");
+        name = temp
+        // return tempName
+    }
+})
+```
+
+![image-20231214155908252](./Vue.assets/image-20231214155908252.png)
+
+![image-20231214155712611](./Vue.assets/image-20231214155712611.png)
+
+通过浏览器控制台查询，发现clazz中的name属性需要点击一下，才能看到，并且会调用get方法
+
+说明clazz代理name变量成功
+
+### 自制一个与Vue框架类似的数据代理机制
+
+
+
+```js
+class Vue{
+	constructor(options) {
+        // 获取到data对象的数据
+        Object.keys(options.data).forEach((propertyName, index) => {
+            // console.log(propertyName, index, firstChar);
+            // 判断propertyName的开头字母是否为$ _
+            let firstChar = propertyName.charAt(0);
+            if (firstChar != '_' && firstChar != '$') {
+                Object.defineProperty(this, propertyName, {
+                    get : function() {
+                        return options.data[propertyName]
+                    },
+                    set : function(val) {
+                        options.data[propertyName] = val
+                    }
+                })
+            }
+        })
+    }
+}
 ```
 
