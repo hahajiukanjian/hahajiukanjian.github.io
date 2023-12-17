@@ -149,11 +149,11 @@ Vue框架自己是能够看懂的。这种语法在Vue框架中被称为：模�
 #### 主要研究：{{这里可以写什么}}
 
 1. 在data中声明的变量、函数等都可以。
-2. 常量都可以。    
+2. 常量都可以。
 3. 只要是合法的javascript表达式，都可以。
 4. 模板表达式都被放在沙盒中，只能访问全局变量的一个白名单，如 Math 和 Date 等。
-    'Infinity,undefined,NaN,isFinite,isNaN,' 'parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,' 
-    'Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,' 
+    'Infinity,undefined,NaN,isFinite,isNaN,' 'parseFloat,parseInt,decodeURI,decodeURIComponent,encodeURI,encodeURIComponent,'
+    'Math,Number,Date,Array,Object,Boolean,String,RegExp,Map,Set,JSON,Intl,'
     'require'
 
 ```html
@@ -347,7 +347,7 @@ Vue框架自己是能够看懂的。这种语法在Vue框架中被称为：模�
         属性内部插值这种语法已经被移除了。（可能Vue在以前的版本中是支持这种写法的，但是现在不允许了。）
         请使用v-bind或冒号速记来代替。
         请使用 <div :id="val"> 来代替 <div id="{{ val }}">
-     --> 
+     -->
 </div>
 
 <script>
@@ -588,29 +588,339 @@ Vue框架源代码中关键性代码：
     }
     ```
 
-    #### data也可以是一个函数
+#### data也可以是一个函数
+```js
+// data : {
+//     msg : 'Hello Vue!'
+// }
+// data functions should return an object：data函数应该返回一个对象。
 
-    ```js
-    // data : {
-    //     msg : 'Hello Vue!'
-    // }
-    // data functions should return an object：data函数应该返回一个对象。
-    
-    // data 也可以是一个函数。
-    // 如果是函数的话，必须使用return语句返回{}对象。
-    // data可以是直接的对象，也可以是一个函数，什么时候使用直接的对象？什么时候使用函数呢？（等你学到组件的时候自然就明白了。）
-    // data : function(){
-    //     return {
-    //         msg : 'Hello Vue!'
-    //     }
-    // }
-    
-    // 在对象当中，函数的 :function 可以省略
-    data(){
-        return {
-            msg : 'Hello Zhangsan!'
-        }
+// data 也可以是一个函数。
+// 如果是函数的话，必须使用return语句返回{}对象。
+// data可以是直接的对象，也可以是一个函数，什么时候使用直接的对象？什么时候使用函数呢？（等你学到组件的时候自然就明白了。）
+// data : function(){
+//     return {
+//         msg : 'Hello Vue!'
+//     }
+// }
+
+// 在对象当中，函数的 :function 可以省略
+data(){
+    return {
+        msg : 'Hello Zhangsan!'
     }
-    ```
+}
+```
 
-    
+### 事件修饰符
+
+Vue当中提供的事件修饰符：
+        .stop ： 停止事件冒泡，等同于 event.stopPropagation()。
+        .prevent ： 等同于 event.preventDefault() 阻止事件的默认行为。
+        .capture ：添加事件监听器时使用事件捕获模式
+                    添加事件监听器包括两种不同的方式：
+                        一种是从内到外添加。（事件冒泡模式）
+                        一种是从外到内添加。（事件捕获模式）
+        .self ：这个事件如果是“我自己元素”上发生的事件，这个事件不是别人给我传递过来的事件，则执行对应的程序。
+        .once ： 事件只发生一次
+        .passive ：passive翻译为顺从/不抵抗。无需等待，直接继续（立即）执行事件的默认行为。
+                    .passive 和 .prevent 修饰符是对立的。不可以共存。（如果一起用，就会报错。）
+                    .prevent：阻止事件的默认行为。
+                    .passive：解除阻止。
+
+[示例代码](https://github.com/hahajiukanjian/Vue/)    /课堂示例源码/基础部分/02-Vue核心技术/16-事件修饰符.html
+
+
+
+
+
+
+
+### 按键修饰符
+
+#### 是什么？
+
+用来表示键盘按键的值，有两种表示方式：**键值**，**名称**，**自定义名称**
+
+如：回车键	13	enter
+
+#### 作用？
+
+跟在keyup（按键按下并抬起），keydown（按键按下未抬起）后面，捕获特定按键，执行特定的操作
+
+#### 常用的按键修饰符
+
+```vue
+.enter
+.tab （必须配合keydown事件使用。）
+.delete (捕获“删除”和“退格”键)
+.esc
+.space
+.up
+.down
+.left
+.right
+```
+
+##### 怎么获取某个键的按键修饰符？
+
+1. 通过event.key获取这个键的真实名字。
+2. 第二步：将这个真实名字以kebab-case风格进行命名。
+    1. PageDown是真实名字。经过命名之后：page-down
+
+#### 自定义按键修饰符
+
+通过Vue的全局配置对象config来进行按键修饰符的自定义。
+
+`Vue.config.keyCodes.自定义按键名 = 键值`
+
+`Vue.config.keyCodes.huiche = 13`
+
+#### 系统修饰键
+
+ctrl、alt、shift、meta
+
+对于keydown事件来说：只要按下ctrl键，keydown事件就会触发。
+
+对于keyup事件来说：需要按下ctrl键，并且加上按下组合键，然后松开组合键之后，keyup事件才能触发。
+
+#### 示例
+
+```html
+<div id="app">
+    回车键（原始函数判断）：<input type="text" @keyup="printValue1"><br>
+    回车键（描述符）：<input type="text" @keyup.enter="printValue"><br>
+    回车键（键值）：<input type="text" @keyup.13="printValue"><br>
+    ctrl（keydown）：<input type="text" @keydown.ctrl="printValue"><br>
+    ctrl（keyup）：<input type="text" @keyup.ctrl="printValue"><br>
+    ctrl（+i）：<input type="text" @keyup.ctrl.i="printValue"><br>
+</div>
+
+<script>
+    const vm = new Vue({
+        el : '#app',
+        data : {
+        },
+        methods : {
+            printValue(event) {
+                console.log(event.target.value);
+            },
+            printValue1(event) {
+                if (event.keyCode === 13) {
+                    console.log(event.target.value);
+                }
+            }
+        }
+    })
+</script>
+```
+
+### 反转字符串
+
+#### 直接在差值表达式中写出
+
+```html
+正序字符串：<input type="text" v-model="str"><br> <!-- 使用双向绑定，将输入的字符串传给Vue对象 -->
+反转字符串：{{str.split('').reverse().join('')}}<br>
+```
+
+三个问题：
+
+1. 可读性差。
+2. 代码没有得到复用。
+3. 难以维护。
+
+#### 在methods中写方法
+
+```js
+<div id="app">
+    <h1>{{msg}}</h1>
+    输入的信息：<input type="text" v-model="info"> <br>
+    反转的信息：{{strResverse()}} <br>
+    反转的信息：{{strResverse()}} <br>
+    反转的信息：{{strResverse()}} <br>
+    反转的信息：{{strResverse()}} <br>
+    反转的信息：{{strResverse()}} <br>
+    反转的信息：{{strResverse()}} <br>
+</div>
+
+<script>
+    const vm = new Vue({
+        el : '#app',
+        data : {
+            msg : '计算属性-反转字符串案例',
+            info : ''
+        },
+        methods : {
+            strResverse() {
+                console.log('@');
+                return this.info.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+```
+
+问题：
+
+如果有多处调用该函数的话，每次都需要重新执行，拖慢性能
+
+#### 计算属性
+
+
+
+### 计算属性
+
+#### 什么是计算属性？
+
+使用**Vue的原有属性**，经过一系列的运算/计算，最终得到了一个**全新的属性**，叫做计算属性。
+
+- **Vue的原有属性:** data对象当中的属性可以叫做Vue的原有属性。
+
+- **全新的属性:** 表示生成了一个新的属性，和data中的属性无关了，新的属性也有自己的属性名和属性值。
+
+
+
+#### 计算属性怎么用？
+
+语法格式：需要一个新的配置项 computed
+
+```vue
+computed : {
+    // 这是一个计算属性
+    计算属性1 : {
+        // setter 和 getter方法。
+        // 当读取计算属性1的值的时候，getter方法被自动调用。
+        get(){
+
+        },
+        // 当修改计算属性1的值的时候，setter方法被自动调用。
+        set(val){
+
+        }
+    },
+    // 这是另一个计算属性
+    计算属性2 : {},
+}
+```
+
+调用计算属性的时候，会执行get方法，当已经执行过一次get方法之后，再次调用计算属性时，会从缓存当中获取计算属性的值。
+
+这就引出了一个问题：更改计算属性的值后，程序还是会从缓存当中获取值，而不是通过get方法获取。
+
+这个问题，Vue的开发者当然想到了，我们来研究一下get方法被执行的触发时机
+
+#### get方法被执行的触发时机
+
+第一个时机：第一次访问这个属性的时候。
+
+第二个时机：该计算属性所关联的Vue原有属性的值发生变化时，getter方法会被重新调用一次。
+
+#### 示例
+
+```html
+<div id="app">
+    <h1>{{msg}}</h1>
+    输入的信息：<input type="text" v-model="info"> <br>
+    反转的信息：{{reversedInfo}}<br>
+    反转的信息：{{reversedInfo}}<br>
+    反转的信息：{{reversedInfo}}<br>
+    反转的信息：{{reversedInfo}}<br>
+    反转的信息：{{reversedInfo}}<br>
+    {{hehe}} <br>
+    {{hehe}} <br>
+    {{hehe}} <br>
+    {{hehe}} <br>
+    {{hehe}} <br>
+    {{hello()}} <br>
+    {{hello()}} <br>
+    {{hello()}} <br>
+    {{hello()}} <br>
+    {{hello()}} <br>
+</div>
+<script>
+    const vm = new Vue({
+        el : '#app',
+        data : {
+            msg : '计算属性-反转字符串案例',
+            info : ''
+        },
+        methods : {
+            hello(){
+                console.log('hello方法执行了')
+                return 'hello'
+            }
+        },
+        computed : {
+            // 可以定义多个计算属性
+            hehe : {
+                // get方法的调用时机包括两个
+                // 第一个时机：第一次访问这个属性的时候。
+                // 第二个时机：该计算属性所关联的Vue原有属性的值发生变化时，getter方法会被重新调用一次。
+                get(){
+                    console.log('getter方法调用了')
+                    //console.log(this === vm)
+                    return 'haha' + this.info
+                },
+                // 不能使用箭头函数，使用箭头函数会导致this的指向是：window
+                // get:()=>{
+                //     console.log('getter方法调用了')
+                //     console.log(this === vm)
+                //     return 'haha'
+                // },
+                set(val){
+                    console.log('setter方法调用了')
+                    //console.log(this === vm)
+                }
+            },
+            // 完整写法
+            /* reversedInfo : {
+                get(){
+                    return this.info.split('').reverse().join('')
+                },
+                // 当修改计算属性的时候，set方法被自动调用。
+                set(val){
+                    //console.log('setter方法被调用了。')
+                    // 不能这么做，这样做就递归了。
+                    //this.reversedInfo = val
+                    // 怎么修改计算属性呢？原理：计算属性的值变还是不变，取决于计算属性关联的Vue原始属性的值。
+                    // 也就是说：reversedInfo变还是不变，取决于info属性的值变不变。
+                    // 本质上：修改计算属性，实际上就是通过修改Vue的原始属性来实现的。
+                    this.info = val.split('').reverse().join('')
+                }
+            } */
+
+            // 简写形式：set不需要的时候。
+            reversedInfo(){
+                return this.info.split('').reverse().join('')
+            }
+        }
+    })
+</script>
+```
+
+#### 计算属性的简写
+
+当该计算属性只需要get方法时可以由
+
+```js
+reversedInfo : {
+    get(){
+        return this.info.split('').reverse().join('')
+    },
+    set(val){
+        this.info = val.split('').reverse().join('')
+    }
+}
+```
+
+简化为
+
+```js
+reversedInfo(){
+    return this.info.split('').reverse().join('')
+}
+```
+
+
+

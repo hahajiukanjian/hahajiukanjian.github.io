@@ -37,7 +37,7 @@ theme:
     - navigation.instant.progress # 加载时间超过400毫秒时，显示进度条
     # - navigation.sections # 关闭左侧折叠
     - navigation.path # 打开一个文档时，在文档上方开启导航路径
-    - toc.integrate # 将右侧的目录改为在左侧显示
+    # - toc.integrate # 将右侧的目录改为在左侧显示
     - search.highlight # 高亮搜索
     - search.suggest # 搜索输入一些字母时推荐补全整个单词
     - content.code.copy # 可以通过按钮复制代码
@@ -84,11 +84,11 @@ nav:
         - 查找与排序: 技术学习/CPP/数据结构/Chap7_查找与排序/查找与排序.md
     - JAVA:
       - JavaWeb:
-        - Servlet: 技术学习/Java/JakartEE/JavaWeb/Servlet/1-Servlet.md
-        - JSP: 技术学习/Java/JakartEE/JavaWeb/Servlet/2-JSP.md
-        - EL表达式: 技术学习/Java/JakartEE/JavaWeb/Servlet/3-EL表达式.md
-        - JSTL: 技术学习/Java/JakartEE/JavaWeb/Servlet/4-JSTL标签库.md
-        - Filter: 技术学习/Java/JakartEE/JavaWeb/Servlet/5-Filter过滤器.md
+        - Servlet: 技术学习/Java/JakartEE/JavaWeb/1-Servlet.md
+        - JSP: 技术学习/Java/JakartEE/JavaWeb/2-JSP.md
+        - EL表达式: 技术学习/Java/JakartEE/JavaWeb/3-EL表达式.md
+        - JSTL: 技术学习/Java/JakartEE/JavaWeb/4-JSTL标签库.md
+        - Filter: 技术学习/Java/JakartEE/JavaWeb/5-Filter过滤器.md
         - Servlet-JSP讲义: 技术学习/Java/JakartEE/JavaWeb/0-Servlet-JSP-课堂笔记.md
       - JDBC: 技术学习/Java/JakartEE/JDBC/JDBC.md
       - Spring6:
